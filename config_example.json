@@ -1,0 +1,51 @@
+{
+    "api_key": "sk-123_OpenAI_API_Key",
+    "target_channels": 
+    [
+        12313131231,
+        5234423423
+    ],
+    "delim": "，。、：！？；（）「」,.\n",
+    "discord_token": "",
+    "emoji_pending": "<Pending:123>",
+    "emoji_done": "<Done:123>",
+    "message_reset": "已重置歷史訊息", 
+    "message_waiting": "（等待回應中...）",
+    "message_on_error": "發生錯誤，請稍後嘗試",
+    "message_no_resp": "無法取得回應，請稍後再試",
+    "reset_delta": {
+        "hours": 1
+    },
+    "command_prefix": [
+        "%",
+        "/"
+    ],
+    "help_command": [
+        "help",
+        "h",
+        "hh",
+        "hhh"
+    ],
+    "reset_command": [
+        "reset",
+        "r",
+        "rr",
+        "rrr"
+    ],
+    "help_message": [
+        "《Chat GPT機器人使用說明書》",
+        "",
+        "在此頻道標記機器人後輸入訊息就可以跟機器人互動",
+        "如果完成回覆，會在訊息下方新增一個表情",
+        "如果正在回覆，會在訊息下方新增一個表情(故障中)",
+        "如果回覆到一半就結束了，可以複製最後兩三句話當作新的輸入",
+        "若一個小時沒有使用，會自動重置聊天紀錄",
+        "",
+        "%h - 顯示幫助訊息",
+        "%r - 重置聊天室",
+        ""
+    ],
+    "converter_type": "s2tw",
+    "system_prompt": "你是一名人造人機器人 使用對話回應",
+    "max_turns": 10
+}

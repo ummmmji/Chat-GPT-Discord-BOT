@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  oppybot:
+    build: .
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./Logs:/usr/src/app/Logs
+      - ./config.json:/usr/src/app/config.json
