@@ -156,7 +156,6 @@ class OppyBot(discord.Client):
         msg = msg.replace("<@!", "<@")
         if not msg.startswith(f'<@{self.user.id}>'):
             return True
-
         if self.IsUsing(message.channel.id):
             await message.add_reaction(self.emoji_pending)
             return True
@@ -166,9 +165,7 @@ class OppyBot(discord.Client):
     async def SendHelp(self, message: Message):
         help_str = BacktickConcat(self.prefix, self.help_command)
         reset_str = BacktickConcat(self.prefix, self.reset_command)
-        emoji_done_s = "<:" + self.emoji_done[1:]
-        emoji_pending_s = "<:" + self.emoji_pending[1:]
-        args = (emoji_done_s, emoji_pending_s, help_str, reset_str)
+        args = (self.emoji_done, self.emoji_pending, help_str, reset_str)
         await message.channel.send("\n".join(self.help_message) % args)
 
     def CheckCommand(self, msg, cmds):
@@ -202,7 +199,7 @@ class OppyBot(discord.Client):
         ):
             collect_msg.append(resp)
             resp_msg = self.ProcessMessage(collect_msg)
-            
+
             if self.EndsWithDelim(resp_msg):
                 try:
                     await msg.edit(content=resp_msg)
