@@ -202,8 +202,12 @@ class OppyBot(discord.Client):
         ):
             collect_msg.append(resp)
             resp_msg = self.ProcessMessage(collect_msg)
+            
             if self.EndsWithDelim(resp_msg):
-                await msg.edit(content=resp_msg)
+                try:
+                    await msg.edit(content=resp_msg)
+                except:
+                    pass
 
         # Send Final Respone
         if resp_msg != "":
