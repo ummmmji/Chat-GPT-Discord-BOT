@@ -4,6 +4,7 @@ import datetime
 import json
 import os
 import signal
+import sys
 
 from dataclasses import dataclass
 from threading import Lock
@@ -287,6 +288,7 @@ def InitLogger(log_path):
     log_format = (
         "{time:YYYY-MM-DD HH:mm:ss} | <lvl>{level: ^9}</lvl> | {message}"
     )
+    logger.add(sys.stdout, level="INFO", format=log_format)
     logger.add(
         log_path,
         rotation="1 day",
