@@ -3,7 +3,8 @@ import asyncio
 import datetime
 import json
 import os
-import sys
+import signal
+
 from dataclasses import dataclass
 from threading import Lock
 from typing import Dict, List
@@ -39,7 +40,7 @@ class ConfigKeys:
     MaxTurns = "max_turns"
 
 
-class OppyBot(discord.Client):
+class ChatBot(discord.Client):
     def __init__(self, config_path, *args, **kwargs) -> None:
         # Init Discord Client
         intents = discord.Intents.default()
@@ -286,7 +287,6 @@ def InitLogger(log_path):
     log_format = (
         "{time:YYYY-MM-DD HH:mm:ss} | <lvl>{level: ^9}</lvl> | {message}"
     )
-    logger.add(sys.stderr, level="INFO", format=log_format)
     logger.add(
         log_path,
         rotation="1 day",
@@ -298,19 +298,32 @@ def InitLogger(log_path):
     )
 
 
+class GracefulKiller():
+    def __init__(self):
+        signal.signal(signal.SIGINT, self.exit_gracefully)
+        signal.signal(signal.SIGTERM, self.exit_gracefully)
+
+    def exit_gracefully(self, signum, frame):
+        exit()
+
+
 def Main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--Config", default="config.json")
-    parser.add_argument("--LogFile", default="Logs/Oppy.log")
+    parser.add_argument("--LogFile", default="Logs/ChatBot.log")
     args: Args = parser.parse_args()
     InitLogger(args.LogFile)
-    OppyBot(args.Config).Run()
+
+    bot = ChatBot(args.Config)
+    GracefulKiller()
+    bot.Run()
 
 
 @dataclass
 class Args:
     Config: str
     LogFile: str
+
 
 if __name__ == "__main__":
     Main()
