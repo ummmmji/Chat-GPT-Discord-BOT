@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  oppybot:
+  chat-gpt-disocrd-bot:
     build: .
     tty: true
     stdin_open: true
